@@ -1,6 +1,7 @@
 package com.incubyte;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -56,5 +57,13 @@ public class StringCalculatorTest {
 	@CsvSource(value={"'//;\n1;2':3","'//!\n1!2!3':6"}, delimiter=':')
 	public void testAdd_ReturnSum_WhenCustomDelimiterIsUsed(String input, int expectedSum) {
 		assertEquals(expectedSum, stringCalculator.add(input));
+	}
+	
+	@Test
+	public void testAdd_ThrowsException_WhenNegativeNumberIsPassed() {
+		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+			stringCalculator.add("-1,2");
+			});
+		assertEquals("negative numbers not allowed -1", exception.getMessage());
 	}
 }

@@ -19,7 +19,11 @@ public class StringCalculator {
 		
 		int sum = 0;
 		for (String str : splittedStrings) {
-			sum += Integer.valueOf(str);
+			int number = Integer.valueOf(str);
+			if (number < 0) {
+				throw new IllegalArgumentException("negative numbers not allowed " + number);
+			}
+			sum += number;
 		}
 		return sum;
 	}
