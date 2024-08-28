@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class StringCalculatorTest {
 
@@ -36,5 +38,11 @@ public class StringCalculatorTest {
 		int expectedSum = 3;
 		
 		assertEquals(expectedSum, actualSum);
+	}
+	
+	@ParameterizedTest
+	@CsvSource(value={"1,2,3:6","1,2,3,4:10","10,10,11,12,15:58"}, delimiter=':')
+	public void testAdd_ReturnSum_WhenAnyAmountOfNoArePassedAsString(String input, int expectedSum) {
+		assertEquals(expectedSum, stringCalculator.add(input));
 	}
 }

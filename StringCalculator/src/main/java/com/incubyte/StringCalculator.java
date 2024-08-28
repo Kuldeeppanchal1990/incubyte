@@ -4,19 +4,21 @@ public class StringCalculator {
 	
 	private static final String COMMA_DELIMITER = ",";
 
-	public int add(String string) {
-		if (string.isBlank()) {
+	public int add(String inputString) {
+		if (inputString.isBlank()) {
 			return 0;
 		}
 		
-		if (string.contains(COMMA_DELIMITER) == false) {
-			return Integer.valueOf(string);
+		if (inputString.contains(COMMA_DELIMITER) == false) {
+			return Integer.valueOf(inputString);
 		}
 		
-		String[] splittedStr = string.split(COMMA_DELIMITER);
-		int n1 = Integer.valueOf(splittedStr[0]);
-		int n2 = Integer.valueOf(splittedStr[1]);
-		return n1 + n2;
+		String[] splittedStrs = inputString.split(COMMA_DELIMITER);
+		int sum = 0;
+		for (String str : splittedStrs) {
+			sum += Integer.valueOf(str);
+		}
+		return sum;
 	}
 
 }
