@@ -29,4 +29,12 @@ public class StringCalculatorTest {
 		
 		assertEquals(expectedSum, actualSum);
 	}
+	
+	@Test
+	public void testAdd_ReturnSumOfTwoNos_WhenTwoNosArePassedAsString() {
+		int actualSum = stringCalculator.add("1,2");
+		int expectedSum = 3;
+		
+		assertEquals(expectedSum, actualSum);
+	}
 }
