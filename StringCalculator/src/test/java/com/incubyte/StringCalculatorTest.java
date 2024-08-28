@@ -48,7 +48,13 @@ public class StringCalculatorTest {
 	
 	@ParameterizedTest
 	@CsvSource(value={"'1,2\n3':6","'1\n2\n3':6"}, delimiter=':')
-	public void testAdd_ReturnSum_WhenDelimiterForNosHaveSlashN(String input, int expectedSum) {
+	public void testAdd_ReturnSum_WhenCommaOrSlashNusedAsDelimiter(String input, int expectedSum) {
+		assertEquals(expectedSum, stringCalculator.add(input));
+	}
+	
+	@ParameterizedTest
+	@CsvSource(value={"'//;\n1;2':3","'//!\n1!2!3':6"}, delimiter=':')
+	public void testAdd_ReturnSum_WhenCustomDelimiterIsUsed(String input, int expectedSum) {
 		assertEquals(expectedSum, stringCalculator.add(input));
 	}
 }
