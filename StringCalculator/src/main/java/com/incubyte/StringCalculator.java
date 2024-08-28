@@ -18,12 +18,17 @@ public class StringCalculator {
 		String[] splittedStrings = splitInputString(inputString);
 		
 		int sum = 0;
+		String negNos = "";
 		for (String str : splittedStrings) {
 			int number = Integer.valueOf(str);
 			if (number < 0) {
-				throw new IllegalArgumentException("negative numbers not allowed " + number);
+				negNos += "," + number;
 			}
 			sum += number;
+		}
+		
+		if (negNos.length() > 0) {
+			throw new IllegalArgumentException("negative numbers not allowed " + negNos.substring(1));
 		}
 		return sum;
 	}
