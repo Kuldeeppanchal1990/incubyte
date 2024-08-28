@@ -45,4 +45,10 @@ public class StringCalculatorTest {
 	public void testAdd_ReturnSum_WhenAnyAmountOfNoArePassedAsString(String input, int expectedSum) {
 		assertEquals(expectedSum, stringCalculator.add(input));
 	}
+	
+	@ParameterizedTest
+	@CsvSource(value={"'1,2\n3':6","'1\n2\n3':6"}, delimiter=':')
+	public void testAdd_ReturnSum_WhenDelimiterForNosHaveSlashN(String input, int expectedSum) {
+		assertEquals(expectedSum, stringCalculator.add(input));
+	}
 }
