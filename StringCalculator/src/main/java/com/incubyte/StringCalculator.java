@@ -4,6 +4,7 @@ public class StringCalculator {
 	
 	private static final String COMMA_DELIMITER = ",";
 	private static final String NEW_LINE_DELIMITER = "\n";
+	private static final String STAR_DELIMITER = "*";
 	private static final String CUSTOM_DELIMITER_INDICATOR_START = "//";
 
 	public int add(String inputString) {
@@ -18,13 +19,20 @@ public class StringCalculator {
 		String[] splittedStrings = splitInputString(inputString);
 		
 		int sum = 0;
+		if (inputString.startsWith("//*\n")) {
+			sum = 1;
+		}
 		String negNos = "";
 		for (String str : splittedStrings) {
 			int number = Integer.valueOf(str);
 			if (number < 0) {
 				negNos += "," + number;
 			}
-			sum += number;
+			if (inputString.startsWith("//*\n")) {
+				sum *= number;
+			} else {
+				sum += number;
+			}
 		}
 		
 		if (negNos.length() > 0) {
@@ -40,6 +48,9 @@ public class StringCalculator {
 			String[] delimiterAndInputStr = inputString.split(NEW_LINE_DELIMITER, 2);
 			delimiter = delimiterAndInputStr[0].substring(CUSTOM_DELIMITER_INDICATOR_START.length());
 			inputString = delimiterAndInputStr[1];
+		}
+		if (delimiter.equals("*")) {
+			return inputString.split("\\" + delimiter);
 		}
 		return inputString.split(delimiter);
 	}

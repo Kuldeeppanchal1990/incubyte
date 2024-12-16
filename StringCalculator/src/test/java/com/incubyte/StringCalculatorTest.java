@@ -74,4 +74,10 @@ public class StringCalculatorTest {
 			});
 		assertEquals("negative numbers not allowed -1,-2", exception.getMessage());
 	}
+	
+	@ParameterizedTest
+	@CsvSource(value={"'//*\n1*2':2","'//*\n2*2*3':12"}, delimiter=':')
+	public void testMultiplication_ReturnMultiplication_WhenNosPassedWithStarAsaDelimiter(String input, int expectedmultiplicationResult) {
+		assertEquals(expectedmultiplicationResult, stringCalculator.add(input));
+	}
 }
