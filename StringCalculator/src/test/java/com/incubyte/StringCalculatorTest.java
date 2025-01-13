@@ -18,24 +18,24 @@ public class StringCalculatorTest {
 	}
 	
 	@Test
-	public void testAdd_ReturnZero_WhenNothingIsPassedAsString() {
-		int actualSum = stringCalculator.add("");
+	public void testcalculate_ReturnZero_WhenNothingIsPassedAsString() {
+		int actualSum = stringCalculator.calculate("");
 		int expectedSum = 0;
 		
 		assertEquals(expectedSum, actualSum);
 	}
 	
 	@Test
-	public void testAdd_ReturnOne_WhenOneIsPassedAsString() {
-		int actualSum = stringCalculator.add("1");
+	public void testcalculate_ReturnOne_WhenOneIsPassedAsString() {
+		int actualSum = stringCalculator.calculate("1");
 		int expectedSum = 1;
 		
 		assertEquals(expectedSum, actualSum);
 	}
 	
 	@Test
-	public void testAdd_ReturnSumOfTwoNos_WhenTwoNosArePassedAsString() {
-		int actualSum = stringCalculator.add("1,2");
+	public void testcalculate_ReturnSumOfTwoNos_WhenTwoNosArePassedAsString() {
+		int actualSum = stringCalculator.calculate("1,2");
 		int expectedSum = 3;
 		
 		assertEquals(expectedSum, actualSum);
@@ -43,34 +43,34 @@ public class StringCalculatorTest {
 	
 	@ParameterizedTest
 	@CsvSource(value={"1,2,3:6","1,2,3,4:10","10,10,11,12,15:58"}, delimiter=':')
-	public void testAdd_ReturnSum_WhenAnyAmountOfNoArePassedAsString(String input, int expectedSum) {
-		assertEquals(expectedSum, stringCalculator.add(input));
+	public void testcalculate_ReturnSum_WhenAnyAmountOfNoArePassedAsString(String input, int expectedSum) {
+		assertEquals(expectedSum, stringCalculator.calculate(input));
 	}
 	
 	@ParameterizedTest
 	@CsvSource(value={"'1,2\n3':6","'1\n2\n3':6"}, delimiter=':')
-	public void testAdd_ReturnSum_WhenCommaOrSlashNusedAsDelimiter(String input, int expectedSum) {
-		assertEquals(expectedSum, stringCalculator.add(input));
+	public void testcalculate_ReturnSum_WhenCommaOrSlashNusedAsDelimiter(String input, int expectedSum) {
+		assertEquals(expectedSum, stringCalculator.calculate(input));
 	}
 	
 	@ParameterizedTest
 	@CsvSource(value={"'//;\n1;2':3","'//!\n1!2!3':6"}, delimiter=':')
-	public void testAdd_ReturnSum_WhenCustomDelimiterIsUsed(String input, int expectedSum) {
-		assertEquals(expectedSum, stringCalculator.add(input));
+	public void testcalculate_ReturnSum_WhenCustomDelimiterIsUsed(String input, int expectedSum) {
+		assertEquals(expectedSum, stringCalculator.calculate(input));
 	}
 	
 	@Test
-	public void testAdd_ThrowsException_WhenNegativeNumberIsPassed() {
+	public void testcalculate_ThrowsException_WhenNegativeNumberIsPassed() {
 		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-			stringCalculator.add("-1,2");
+			stringCalculator.calculate("-1,2");
 			});
 		assertEquals("negative numbers not allowed -1", exception.getMessage());
 	}
 	
 	@Test
-	public void testAdd_ThrowsExceptionWithAllNegativeNosInMsg_WhenMultipleNegativeNumbersArePassed() {
+	public void testcalculate_ThrowsExceptionWithAllNegativeNosInMsg_WhenMultipleNegativeNumbersArePassed() {
 		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-			stringCalculator.add("-1,3,-2,4");
+			stringCalculator.calculate("-1,3,-2,4");
 			});
 		assertEquals("negative numbers not allowed -1,-2", exception.getMessage());
 	}
@@ -78,6 +78,6 @@ public class StringCalculatorTest {
 	@ParameterizedTest
 	@CsvSource(value={"'//*\n1*2':2","'//*\n2*2*3':12"}, delimiter=':')
 	public void testMultiplication_ReturnMultiplication_WhenNosPassedWithStarAsaDelimiter(String input, int expectedmultiplicationResult) {
-		assertEquals(expectedmultiplicationResult, stringCalculator.add(input));
+		assertEquals(expectedmultiplicationResult, stringCalculator.calculate(input));
 	}
 }
